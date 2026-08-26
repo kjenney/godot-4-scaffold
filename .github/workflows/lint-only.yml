@@ -36,5 +36,5 @@ jobs:
 
       - name: GDScript lint with gdlint
         run: |
-          pip install "gdtoolkit==4.*"
-          gdlint source/
+          python -m pip install "gdtoolkit==4.*"
+          python -m gdlint source/
