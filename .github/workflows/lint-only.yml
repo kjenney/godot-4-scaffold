@@ -32,7 +32,7 @@ jobs:
       - name: Setup Python for gdlint
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
       - name: GDScript lint with gdlint
         run: |
