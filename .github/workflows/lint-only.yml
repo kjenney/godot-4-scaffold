@@ -29,8 +29,10 @@ jobs:
         run: |
           godot --headless --path . --doctool .
 
-      - name: Install pip
-        run: python3 -m ensurepip --upgrade
+      - name: Setup Python for gdlint
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
 
       - name: GDScript lint with gdlint
         run: |
