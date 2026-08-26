@@ -6,16 +6,15 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  GODOT_VERSION: 4.3
-  EXPORT_NAME: godot-scaffold
-
 jobs:
   lint:
     name: GDScript lint
+    strategy:
+      matrix:
+        godot-version: [4.3]
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:$GODOT_VERSION
+      image: barichello/godot-ci:${{ matrix.godot-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,8 +22,8 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/$GODOT_VERSION.stable \
-             ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
+          mv /root/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable \
+             ~/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable
 
       - name: Lint
         run: |
@@ -37,9 +36,12 @@ jobs:
 
   export-windows:
     name: Windows Export
+    strategy:
+      matrix:
+        godot-version: [4.3]
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:$GODOT_VERSION
+      image: barichello/godot-ci:${{ matrix.godot-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,15 +53,15 @@ jobs:
           mkdir -v -p ~/.local/share/godot/export_templates/
           mkdir -v -p ~/.config/
           mv /root/.config/godot ~/.config/godot
-          mv /root/.local/share/godot/export_templates/$GODOT_VERSION.stable \
-             ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
+          mv /root/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable \
+             ~/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable
 
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
           EXPORT_DIR="$(readlink -f build)"
           godot --headless --verbose --export-release "Windows Desktop" \
-                "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+                "$EXPORT_DIR/windows/godot-scaffold.exe"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -69,9 +71,12 @@ jobs:
 
   export-linux:
     name: Linux Export
+    strategy:
+      matrix:
+        godot-version: [4.3]
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:$GODOT_VERSION
+      image: barichello/godot-ci:${{ matrix.godot-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -81,15 +86,15 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/$GODOT_VERSION.stable \
-             ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
+          mv /root/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable \
+             ~/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable
 
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
           EXPORT_DIR="$(readlink -f build)"
           godot --headless --verbose --export-release "Linux/X11" \
-                "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+                "$EXPORT_DIR/linux/godot-scaffold.x86_64"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -99,9 +104,12 @@ jobs:
 
   export-web:
     name: Web Export
+    strategy:
+      matrix:
+        godot-version: [4.3]
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:$GODOT_VERSION
+      image: barichello/godot-ci:${{ matrix.godot-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -111,8 +119,8 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/$GODOT_VERSION.stable \
-             ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
+          mv /root/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable \
+             ~/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable
 
       - name: Web Build
         run: |
@@ -135,9 +143,12 @@ jobs:
 
   export-mac:
     name: Mac Export
+    strategy:
+      matrix:
+        godot-version: [4.3]
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:$GODOT_VERSION
+      image: barichello/godot-ci:${{ matrix.godot-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -147,15 +158,15 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/$GODOT_VERSION.stable \
-             ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
+          mv /root/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable \
+             ~/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable
 
       - name: Mac Build
         run: |
           mkdir -v -p build/mac
           EXPORT_DIR="$(readlink -f build)"
           godot --headless --verbose --export-release "macOS" \
-                "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
+                "$EXPORT_DIR/mac/godot-scaffold.zip"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
