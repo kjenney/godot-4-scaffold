@@ -2,23 +2,6 @@
 
 A minimal Godot 4.x project scaffolded entirely from the CLI — no Godot editor GUI required. Includes a CI/CD pipeline using GitHub Actions + [godot-ci](https://github.com/marketplace/actions/godot-ci).
 
-## Project structure
-
-```
-godot-4-scaffold/
-├── .github/workflows/
-│   ├── godot-ci.yml          # Full CI: lint + export (Win/Linux/Web/Mac)
-│   └── lint-only.yml         # Lightweight lint-only workflow
-├── assets/
-│   └── icon.png              # Placeholder — replace with your icon
-├── source/
-│   ├── main.tscn             # Entry point scene (Node2D)
-│   └── main.gd               # Entry point script (loads main.tscn)
-├── project.godot             # Project config (created from CLI)
-├── .gitignore
-└── README.md
-```
-
 ## How to create a project from CLI only
 
 ```bash
