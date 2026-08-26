@@ -29,12 +29,11 @@ jobs:
         run: |
           godot --headless --path . --doctool .
 
-      - name: Setup Python for gdlint
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+      - name: Install Python3 and pip for gdlint
+        run: |
+          apt-get update && apt-get install -y python3 python3-pip
 
       - name: GDScript lint with gdlint
         run: |
-          python -m pip install "gdtoolkit==4.*"
-          python -m gdlint source/
+          pip3 install "gdtoolkit==4.*"
+          python3 -m gdlint source/
