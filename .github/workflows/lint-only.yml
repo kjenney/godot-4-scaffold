@@ -29,6 +29,9 @@ jobs:
         run: |
           godot --headless --path . --doctool .
 
+      - name: Install pip
+        run: python3 -m ensurepip --upgrade
+
       - name: GDScript lint with gdlint
         run: |
           pip install "gdtoolkit==4.*"
