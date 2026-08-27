@@ -29,10 +29,16 @@ jobs:
         run: |
           godot --headless --path . --doctool .
 
+      - name: Setup Python for gdlint
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install GDScript linter
+        run: pip install "gdtoolkit==4.*"
+
       - name: GDScript lint with gdlint
-        run: |
-          pip install gdlint
-          gdlint --exclude=.github .
+        run: gdlint --exclude=.github .
 
   export-windows:
     name: Windows Export
