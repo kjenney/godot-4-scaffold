@@ -2,26 +2,11 @@
 .editorconfig
 *.remap
 *.import
-*.import.cfg
-*.import.gd
-*.import.gd.uid
-*.import.res
-*.import.tres
-*.import.tscn
-*.import.tscn.uid
-*.import.tscn.gd
-*.import.tscn.gd.uid
-*.import.tscn.res
-*.import.tscn.res.uid
-*.import.tscn
-*.import.tscn.uid
-*.import.gduid
 
-# Godot export presets
+# Godot export templates (downloaded, not committed)
 export-templates/
-export_presets.cfg
 
-# Godot project settings (auto-generated)
+# Godot project settings
 project.godot.lock
 project.godot.lock.uid
 
@@ -36,14 +21,9 @@ project.godot.lock.uid
 *.bak.tscn.gd
 *.bak.tscn.res
 *.bak.tscn.uid
-*.bak.tscn.gduid
 
 # Godot cache
 cache/
-
-# Godot IDE data
-*.godot
-*.godot.uid
 
 # OS specific
 .DS_Store
