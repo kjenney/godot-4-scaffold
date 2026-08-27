@@ -43,41 +43,6 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           gdlint source/
 
-  export-windows:
-    name: Windows Export
-    strategy:
-      matrix:
-        godot-version: [4.3]
-    runs-on: ubuntu-24.04
-    container:
-      image: barichello/godot-ci:${{ matrix.godot-version }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mkdir -v -p ~/.config/
-          mv /root/.config/godot ~/.config/godot
-          mv /root/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable \
-             ~/.local/share/godot/export_templates/${{ matrix.godot-version }}.stable
-
-      - name: Windows Build
-        run: |
-          mkdir -v -p build/windows
-          EXPORT_DIR="$(readlink -f build)"
-          godot --headless --verbose --export-release "Windows Desktop" \
-                "$EXPORT_DIR/windows/godot-scaffold.exe"
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows
-          path: build/windows
-
   export-linux:
     name: Linux Export
     strategy:
