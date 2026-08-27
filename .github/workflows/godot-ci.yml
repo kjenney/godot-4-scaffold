@@ -37,8 +37,7 @@ jobs:
 
       - name: GDScript lint with gdlint
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          gdlint --exclude=.github .
+          python3 -m gdlint --exclude=.github .
 
   export-windows:
     name: Windows Export
