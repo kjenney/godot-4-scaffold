@@ -30,7 +30,8 @@ jobs:
         run: |
           cd examples/hello-world
           mkdir -v -p builds/web
-          godot --headless --verbose --export-release "Web"
+          godot --headless --verbose --export-release "Web" \
+                "builds/web/index.html"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
