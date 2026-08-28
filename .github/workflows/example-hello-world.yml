@@ -45,3 +45,6 @@ jobs:
           branch: gh-pages
           folder: examples/hello-world/builds/web
           target-folder: examples/hello-world
+          clean-exclude: |
+            scaffold/
+            index.html

@@ -114,8 +114,21 @@ jobs:
         with:
           branch: gh-pages
           folder: build/web
+          target-folder: scaffold
           clean-exclude: |
             examples/
+            index.html
+
+      - name: Deploy index.html
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages
+          folder: .
+          target-folder: .
+          clean-exclude: |
+            scaffold/
+            examples/
+          clean: false
 
   export-mac:
     name: Mac Export
