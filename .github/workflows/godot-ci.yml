@@ -117,7 +117,7 @@ jobs:
           target-folder: examples/scaffold
 
   deploy-gh-pages:
-    name: Deploy gh-pages index
+    name: Deploy gh-pages root
     needs: export-web
     runs-on: ubuntu-24.04
     steps:
@@ -126,12 +126,12 @@ jobs:
         with:
           ref: main
 
-      - name: Deploy root index.html
+      - name: Deploy README.md
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages
           folder: .
-          file: gh-pages-index.html
+          file: README.md
 
   export-mac:
     name: Mac Export
