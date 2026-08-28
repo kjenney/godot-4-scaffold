@@ -116,23 +116,6 @@ jobs:
           folder: build/web
           target-folder: examples/scaffold
 
-  deploy-gh-pages:
-    name: Deploy gh-pages index
-    needs: export-web
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Deploy root index.html
-        uses: JamesIves/github-pages-deploy-action@releases/v4
-        with:
-          branch: gh-pages
-          folder: .
-          file: gh-pages-index.html
-
   export-mac:
     name: Mac Export
     strategy:
