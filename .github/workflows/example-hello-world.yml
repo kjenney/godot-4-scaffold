@@ -7,6 +7,9 @@ on:
       - "examples/hello-world/**"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   export-web:
     name: Web Export
