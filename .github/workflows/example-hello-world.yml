@@ -1,0 +1,45 @@
+name: "Example: Hello World (Web Export)"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "examples/hello-world/**"
+  workflow_dispatch:
+
+jobs:
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:4.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/4.3.stable \
+             ~/.local/share/godot/export_templates/4.3.stable
+
+      - name: Web Export
+        run: |
+          mkdir -v -p build/examples/hello-world
+          cd examples/hello-world
+          EXPORT_DIR="$(readlink -f ../../build/examples/hello-world)"
+          godot --headless --verbose --export-release "Web" \
+                "$EXPORT_DIR/index.html"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-world-web
+          path: build/examples/hello-world
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages
+          folder: build/examples/hello-world
+          target-folder: examples/hello-world

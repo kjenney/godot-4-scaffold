@@ -1,0 +1,13 @@
+# Godot editor settings
+.editorconfig
+*.remap
+*.import
+*.import.cfg
+
+# Godot export presets
+export-templates/
+export_presets.cfg
+
+# OS specific
+.DS_Store
+Thumbs.db
