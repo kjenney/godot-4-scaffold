@@ -25,21 +25,19 @@ jobs:
 
       - name: Web Export
         run: |
-          mkdir -v -p build/examples/hello-world
           cd examples/hello-world
-          EXPORT_DIR="$(readlink -f ../../build/examples/hello-world)"
-          godot --headless --verbose --export-release "Web" \
-                "$EXPORT_DIR/index.html"
+          mkdir -v -p builds/web
+          godot --headless --verbose --export-release "Web"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: hello-world-web
-          path: build/examples/hello-world
+          path: examples/hello-world/builds/web
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages
-          folder: build/examples/hello-world
+          folder: examples/hello-world/builds/web
           target-folder: examples/hello-world

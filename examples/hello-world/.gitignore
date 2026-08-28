@@ -4,9 +4,8 @@
 *.import
 *.import.cfg
 
-# Godot export presets
+# Export templates (not source)
 export-templates/
-export_presets.cfg
 
 # OS specific
 .DS_Store
