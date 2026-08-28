@@ -1,0 +1,12 @@
+fc8a56933c4b1c8d796fdb8f7a9f9475
+::res://::1787934585
+export_presets.cfg::TextFile::-1::1787934584::0::1::::<><>::
+README.md::TextFile::-1::1787934584::0::1::::<><>::
+::res://assets/::1787934584
+icon.png::CompressedTexture2D::3522921268928601491::1787934584::1787934588::1::::<><>::
+::res://build/::1787934585
+::res://build/web/::1787934585
+::res://examples/::1787934584
+::res://source/::1787934584
+main.gd::GDScript::-1::1787934584::0::1::::<>Node<>::
+main.tscn::PackedScene::18548884408::1787934584::0::1::::<><>::res://source/main.gd
