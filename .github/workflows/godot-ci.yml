@@ -114,7 +114,8 @@ jobs:
         with:
           branch: gh-pages
           folder: build/web
-          target-folder: examples/scaffold
+          clean-exclude: |
+            examples/
 
   export-mac:
     name: Mac Export
