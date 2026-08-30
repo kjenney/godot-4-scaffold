@@ -25,6 +25,12 @@ project.godot.lock.uid
 # Godot cache
 cache/
 
+# Godot auto-generated folders
+.godot/
+
+# Godot export output
+builds/
+
 # OS specific
 .DS_Store
 Thumbs.db

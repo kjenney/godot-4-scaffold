@@ -17,7 +17,7 @@ func _ready():
 	console_label.visible = true
 	
 	# Set up the grid
-	var grid_script := grid.get_script()
+	var grid_script: Script = grid.get_script()
 	if grid_script:
 		grid_script.setup_grid()
 	
@@ -25,7 +25,7 @@ func _ready():
 	_setup_walls()
 	
 	# Place player
-	var player_script := player.get_script()
+	var player_script: Script = player.get_script()
 	if player_script:
 		player_script.set_position_on_grid(Vector2(2 * Grid.CELL_SIZE + grid.grid_origin.x * Grid.CELL_SIZE, 2 * Grid.CELL_SIZE + grid.grid_origin.y * Grid.CELL_SIZE))
 	
@@ -37,7 +37,7 @@ func _ready():
 		player_script.interacted.connect(_on_player_interacted)
 
 func _setup_walls():
-	var grid_script := grid.get_script()
+	var grid_script: Script = grid.get_script()
 	for x in range(Grid.GRID_WIDTH):
 		grid_script.cells[0][x].cell_type = Cell.CellType.SOLID
 		grid_script.cells[0][x].queue_redraw()
@@ -55,7 +55,7 @@ func _setup_enemy():
 	enemy.position = Vector2(8 * Grid.CELL_SIZE + grid.grid_origin.x * Grid.CELL_SIZE, 8 * Grid.CELL_SIZE + grid.grid_origin.y * Grid.CELL_SIZE)
 	grid.add_child(enemy)
 	
-	var enemy_script := enemy.get_script()
+	var enemy_script: Script = enemy.get_script()
 	if enemy_script:
 		enemy_script.set_position_on_grid(enemy.position)
 		enemy_script.is_dialogue_target = true

@@ -26,8 +26,8 @@ func _process(delta: float) -> void:
 		# Snap to grid
 		var grid_x := (new_pos.x - grid.grid_origin.x * Grid.CELL_SIZE)
 		var grid_y := (new_pos.y - grid.grid_origin.y * Grid.CELL_SIZE)
-		var snapped_x := grid.grid_origin.x * Grid.CELL_SIZE + (grid_x / Grid.CELL_SIZE).round() * Grid.CELL_SIZE
-		var snapped_y := grid.grid_origin.y * Grid.CELL_SIZE + (grid_y / Grid.CELL_SIZE).round() * Grid.CELL_SIZE
+		var snapped_x: float = grid.grid_origin.x * Grid.CELL_SIZE + snapped(grid_x / Grid.CELL_SIZE, 1.0) * Grid.CELL_SIZE
+		var snapped_y: float = grid.grid_origin.y * Grid.CELL_SIZE + snapped(grid_y / Grid.CELL_SIZE, 1.0) * Grid.CELL_SIZE
 
 		if move_to(Vector2(snapped_x, snapped_y)):
 			target_position = position

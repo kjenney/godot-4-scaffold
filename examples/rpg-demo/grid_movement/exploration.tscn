@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://grid_movement/exploration.gd" id="1"]
 [ext_resource type="PackedScene" path="res://grid_movement/grid/grid.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://dialogue/dialogue_player/dialogue.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://grid_movement/pawns/player.tscn" id="4"]
 
 [node name="Exploration" type="Node2D" unique_id=499429218]
 script = ExtResource("1")
