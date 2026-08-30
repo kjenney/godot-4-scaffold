@@ -84,6 +84,14 @@ jobs:
     runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:${{ matrix.godot-version }}
+    # Prevent overlapping deployments to gh-pages when multiple pushes land in quick succession.
+    # cancel-in-progress: true ensures only the latest run deploys; older runs are cancelled before deploy.
+    # NOTE: cancel-in-progress can only be set on jobs that have a concurrency group on ALL steps that deploy.
+    # Since we have two deploy steps, we need a different approach: use cancel-in-progress and accept
+    # that a cancelled run won't deploy at all (safer than a race condition).
+    concurrency:
+      group: gh-pages-export
+      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -109,7 +117,7 @@ jobs:
           name: web
           path: build/web
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (scaffold)
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages
@@ -117,9 +125,11 @@ jobs:
           target-folder: scaffold
           clean-exclude: |
             examples/
-            index.html
 
-      - name: Deploy index.html
+      - name: Wait for scaffold deploy to settle
+        run: sleep 5
+
+      - name: Deploy index.html (gh-pages root)
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages

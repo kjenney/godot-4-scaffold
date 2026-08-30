@@ -13,6 +13,10 @@ permissions:
 jobs:
   export-web:
     name: Web Export
+    # Prevent overlapping deployments to gh-pages
+    concurrency:
+      group: gh-pages-example-hello-world
+      cancel-in-progress: true
     runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:4.3
