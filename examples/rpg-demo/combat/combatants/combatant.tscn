@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://combat/combatants/combatant.gd" id="1"]
+[ext_resource type="Script" path="res://combat/combatants/health.gd" id="2"]
+
+[node name="Combatant" type="Node2D"]
+script = ExtResource("1")
+damage = 2
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2")
+life = 10
+
+[node name="Sprite2D" parent="." type="Sprite2D"]
+texture = null
