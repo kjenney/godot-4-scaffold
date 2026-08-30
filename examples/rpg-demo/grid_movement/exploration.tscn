@@ -15,3 +15,16 @@ unique_id=1712702090
 [node name="DialogueCanvas" type="CanvasLayer" parent="." unique_id=1805845816]
 
 [node name="DialogueUI" parent="DialogueCanvas" unique_id=1377939207 instance=ExtResource("3")]
+
+[node name="ConsoleLabel" parent="DialogueCanvas" unique_id=999999999]
+layout_mode = 1
+anchors_preset = 10
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_right = 20.0
+offset_bottom = 0.0
+text = "welcome to the thunderdome"
+horizontal_alignment = 1
+font_size = 18

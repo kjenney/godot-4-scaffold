@@ -4,6 +4,7 @@ extends Node2D
 @onready var player: Node2D = $Grid/Player
 @onready var dialogue_ui: Node2D = $DialogueCanvas/DialogueUI
 @onready var dialogue_player: Node2D = $DialogueCanvas/DialoguePlayer
+@onready var console_label: Label = $DialogueCanvas/ConsoleLabel
 
 # Simple NPC enemy pawn that triggers combat
 @export var enemy_spawn_point: Vector2
@@ -11,6 +12,10 @@ var enemy: Node2D
 var dialogue_active: bool = false
 
 func _ready():
+	# Show console message
+	console_label.text = "welcome to the thunderdome"
+	console_label.visible = true
+	
 	# Set up the grid
 	var grid_script := grid.get_script()
 	if grid_script:
