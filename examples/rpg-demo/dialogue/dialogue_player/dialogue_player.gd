@@ -9,6 +9,8 @@ var dialogue_name: String = ""
 var current: int = 0
 var dialogue_text: String = ""
 
+@onready var dialogue_ui: Control = $"../DialogueUI"
+
 func start_dialogue() -> void:
 	dialogue_started.emit()
 	current = 0
@@ -35,5 +37,11 @@ func load_dialogue(file_path: String) -> Dictionary:
 	if file:
 		var test_json_conv := JSON.new()
 		test_json_conv.parse(file.get_as_text())
-		return test_json_conv.data
+		var result: Dictionary = test_json_conv.data as Dictionary
+		return result
 	return {}
+
+func show_dialogue(dialogue_data: Dictionary, keys: Array) -> void:
+	var key: String = keys[0]
+	var entry: Dictionary = dialogue_data[key]
+	dialogue_ui.show_dialogue(entry.name, entry.text)

@@ -42,7 +42,7 @@ func _on_combat_finished(winner: Node, _loser: Node) -> void:
 	$AnimationPlayer.play_backwards("fade_to_black")
 	add_child(exploration_screen)
 	
-	var dialogue := load("res://dialogue/dialogue_player/dialogue_player.tscn").instantiate()
+	var dialogue: Node = load("res://dialogue/dialogue_player/dialogue_player.tscn").instantiate()
 	
 	if winner.name == "Player":
 		dialogue.dialogue_file = PLAYER_WIN
