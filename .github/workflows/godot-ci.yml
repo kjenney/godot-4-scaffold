@@ -85,12 +85,10 @@ jobs:
     container:
       image: barichello/godot-ci:${{ matrix.godot-version }}
     # Prevent overlapping deployments to gh-pages when multiple pushes land in quick succession.
-    # cancel-in-progress: true ensures only the latest run deploys; older runs are cancelled before deploy.
-    # NOTE: cancel-in-progress can only be set on jobs that have a concurrency group on ALL steps that deploy.
-    # Since we have two deploy steps, we need a different approach: use cancel-in-progress and accept
-    # that a cancelled run won't deploy at all (safer than a race condition).
+    # Using a single group name (gh-pages) across all workflows ensures only the latest run deploys;
+    # older runs are cancelled before they reach the deploy step.
     concurrency:
-      group: gh-pages-export
+      group: gh-pages
       cancel-in-progress: true
     steps:
       - name: Checkout

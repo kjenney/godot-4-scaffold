@@ -13,9 +13,10 @@ permissions:
 jobs:
   export-web:
     name: Web Export
-    # Prevent overlapping deployments to gh-pages
+    # Prevent overlapping deployments to gh-pages — single group name (gh-pages) across all workflows
+    # ensures only the latest run deploys; older runs are cancelled before they reach the deploy step.
     concurrency:
-      group: gh-pages-example-rpg-demo
+      group: gh-pages
       cancel-in-progress: true
     runs-on: ubuntu-24.04
     container:
