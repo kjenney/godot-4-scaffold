@@ -1,0 +1,30 @@
+name: Auto-Retry Cancelled Deploy
+
+# Automatically re-run workflows that were cancelled by concurrency
+# (e.g., gh-pages race condition). Only retries once per run (run_attempt 1).
+# Does NOT retry: action_required (approval gates are human's job).
+
+on:
+  workflow_run:
+    workflows:
+      - "Example: RPG Demo (Web Export)"
+      - "Godot 4 CI"
+    types: [completed]
+    branches: [main]
+
+permissions:
+  actions: write  # needed to re-run cancelled workflows
+
+jobs:
+  retry:
+    name: Re-run cancelled deploy
+    runs-on: ubuntu-24.04
+    if: >-
+      github.event.workflow_run.conclusion == 'cancelled' &&
+      github.event.workflow_run.run_attempt == 1
+    steps:
+      - name: Re-run cancelled workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run rerun ${{ github.event.workflow_run.id }}
